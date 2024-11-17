@@ -1,12 +1,9 @@
 import { Guitar } from "./components/Guitar"
 import { Header } from "./components/Header"
-import { useCarrito } from "./hook/useCarrito"
 import { useReducer } from "react";
 import { cartReducer, initialState } from "./reducer/cart-reducer";
 
 function App() {
-
-  const { IncrementarCantidad, DecrementarCantidad, CleanCarrito, cartTotal } = useCarrito()
 
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
@@ -14,11 +11,7 @@ function App() {
     <>
       {/* Header de la Pagina */}
       <Header Carrito={state.cart} 
-              dispatch={dispatch} 
-              CleanCarrito={CleanCarrito} 
-              sumar={IncrementarCantidad} 
-              decrementar={DecrementarCantidad}
-              cartTotal={cartTotal}
+              dispatch={dispatch}
       />
 
       <main className="container-xl mt-5">

@@ -17,8 +17,4 @@ export type cartItem = guitar & {
 export type HeaderProps = {
     Carrito: cartItem[]
     dispatch: Dispatch<CartActions>
-    sumar :(id:number) => void
-    decrementar : (id:number) => void
-    CleanCarrito: () => void
-    cartTotal : number
 }

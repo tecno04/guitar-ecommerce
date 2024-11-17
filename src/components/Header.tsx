@@ -1,6 +1,11 @@
 import type { HeaderProps } from '../types/index'
+import { useMemo } from 'react'
 
-export const Header = ({Carrito, dispatch, CleanCarrito, sumar, decrementar, cartTotal} : HeaderProps) => {
+export const Header = ({Carrito, dispatch} : HeaderProps) => {
+
+    const total = useMemo(
+                    () => Carrito.reduce((total, item) => total + (item.quantity * item.price), 0 ), 
+                    [Carrito])
 
     return (
         <header className="py-5 header">
@@ -47,12 +52,12 @@ export const Header = ({Carrito, dispatch, CleanCarrito, sumar, decrementar, car
                                                             <td className="flex align-items-start gap-4">
                                                                 <button
                                                                     type="button"
-                                                                    className="btn btn-dark" onClick={() => decrementar(item_guitar.id)}>
+                                                                    className="btn btn-dark" onClick={() => dispatch({type:'decrease-quantity', payload:{id:item_guitar.id}})   }>
                                                                 </button>
                                                                 {item_guitar.quantity}
                                                                 <button
                                                                     type="button"
-                                                                    className="btn btn-dark" onClick={() => sumar(item_guitar.id)}>
+                                                                    className="btn btn-dark" onClick={() => dispatch({type:'increase-quantity', payload:{id:item_guitar.id}}) }>
                                                                     +
                                                                 </button>
                                                             </td>
@@ -69,8 +74,8 @@ export const Header = ({Carrito, dispatch, CleanCarrito, sumar, decrementar, car
                                             }
                                         </tbody>
                                     </table>
-                                    <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
-                                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={CleanCarrito}>Vaciar Carrito</button>
+                                    <p className="text-end">Total pagar: <span className="fw-bold">${total}</span></p>
+                                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={() => dispatch({type: 'clear-cart'})} >Vaciar Carrito</button>
                                     </>
                                 }
                             </div>

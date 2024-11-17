@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import {db} from "../data/db"
+import { cartItem } from "../types"
 
 export const useCarrito = () => {
 
@@ -10,53 +11,6 @@ export const useCarrito = () => {
 
     const [data, _] = useState(db)
     const [Carrito, setCarrito] = useState(initialCart)
-
-    function addToCart(item: Guitar) {
-
-        const exists = Carrito.findIndex(guitar => guitar.id === item.id)
-
-        if (exists >= 0) {
-
-            const updatedCarrito = [...Carrito]
-            updatedCarrito[exists].quantity += 1
-            setCarrito(updatedCarrito)
-
-        } else {
-
-            const newItem : cartItem = {...item, quantity: 1}
-            setCarrito([...Carrito, newItem])
-
-            // setCarrito([...Carrito, item])
-            // item.quantity = 1
-
-        }
-
-    }
-
-    function IncrementarCantidad(id: Guitar['id']) {
-
-        const encontrado = Carrito.findIndex(guitar => guitar.id === id)
-        const updatedQuantity = [...Carrito]
-        updatedQuantity[encontrado].quantity++
-        setCarrito(updatedQuantity)
-
-    }
-
-    function DecrementarCantidad(id: Guitar['id']) {
-
-        const encontrado = Carrito.findIndex(guitar => guitar.id === id)
-        const updatedQuantity = [...Carrito]
-        if (updatedQuantity[encontrado].quantity >= 1) {
-            updatedQuantity[encontrado].quantity--
-            setCarrito(updatedQuantity)
-        }
-    }
-
-    function removeCart(id: Guitar['id']) {
-
-        setCarrito(prevCarrito => prevCarrito.filter(guitar => guitar.id !== id))
-
-    }
 
     function CleanCarrito() {
         setCarrito([])
@@ -71,10 +25,6 @@ export const useCarrito = () => {
     return {
         data,
         Carrito,
-        addToCart,
-        removeCart,
-        IncrementarCantidad,
-        DecrementarCantidad,
         CleanCarrito,
         cartTotal
     }
