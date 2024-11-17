@@ -1,5 +1,7 @@
+import { guitar } from "../types";
+
 //declaramos que la "db" sera del tipo "Guitar" PERO PERO, hay que decirle que sera tipo array (sino da error)
-export const db: Guitar[] = [
+export const db: guitar[] = [
     {
         id: 1,
         name: 'Lukather',
