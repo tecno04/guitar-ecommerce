@@ -18,10 +18,17 @@ export type CartState = {
     cart: cartItem[]
 }
 
+//Funcion para obtener (en caso de que haya guardado algo en el localStorage) los items adicionados
+const initialCart = () : cartItem[] => {
+    const localStorageCartGuitar = localStorage.getItem('cart')
+    return localStorageCartGuitar ? JSON.parse(localStorageCartGuitar) : []
+}
+
 //objeto de estado inicial para pasarle al reducer - que sera del tipo state antes definido
 export const initialState : CartState = {
     data: db,
-    cart: []
+    //cart: []
+    cart:initialCart()
 }
 
 const MAX_GUITAR = 5
