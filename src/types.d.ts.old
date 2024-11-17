@@ -1,0 +1,20 @@
+type Guitar = {
+    id: number
+    name:string
+    image: string
+    description: string
+    price: number
+}
+
+type cartItem = Guitar & {
+    quantity: number
+}
+
+type HeaderProps = {
+    Carrito: cartItem[]
+    remove: (id:number) => void
+    sumar :(id:number) => void
+    decrementar : (id:number) => void
+    CleanCarrito: () => void
+    cartTotal : number
+}
